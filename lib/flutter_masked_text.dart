@@ -187,8 +187,8 @@ class MoneyMaskedTextController extends TextEditingController {
     List<String> parts = _getOnlyNumbers(this.text).split('').toList(growable: true);
 
     parts.insert(parts.length - precision, '.');
-
-    return double.parse(parts.join());
+    final joinedParts = parts.join();
+    return joinedParts.isEmpty ? 0.0 : double.parse(joinedParts);
   }
 
   _validateConfig() {
