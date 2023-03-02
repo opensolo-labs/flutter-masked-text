@@ -3,8 +3,7 @@ library flutter_masked_text2;
 import 'package:flutter/material.dart';
 
 class MaskedTextController extends TextEditingController {
-  MaskedTextController(
-      {String? text, this.mask, Map<String, RegExp>? translator})
+  MaskedTextController({String? text, this.mask, Map<String, RegExp>? translator})
       : super(text: text) {
     this.translator = translator ?? MaskedTextController.getDefaultTranslator();
 
@@ -49,8 +48,7 @@ class MaskedTextController extends TextEditingController {
 
   void moveCursorToEnd() {
     var text = this._lastUpdatedText;
-    this.selection =
-        new TextSelection.fromPosition(new TextPosition(offset: (text).length));
+    this.selection = new TextSelection.fromPosition(new TextPosition(offset: (text).length));
   }
 
   @override
@@ -171,18 +169,18 @@ class MoneyMaskedTextController extends TextEditingController {
       this.text = masked;
 
       var cursorPosition = super.text.length - this.rightSymbol.length;
-      this.selection = new TextSelection.fromPosition(
-          new TextPosition(offset: cursorPosition));
+      this.selection = new TextSelection.fromPosition(new TextPosition(offset: cursorPosition));
     }
   }
 
   double get numberValue {
-    List<String> parts =
-        _getOnlyNumbers(this.text).split('').toList(growable: true);
+    List<String> parts = _getOnlyNumbers(this.text).split('').toList(growable: true);
 
     parts.insert(parts.length - precision, '.');
 
-    return double.parse(parts.join());
+    final partsJoined = parts.join();
+
+    return partsJoined.isNotEmpty ? double.parse(partsJoined) : 0.0;
   }
 
   _validateConfig() {
